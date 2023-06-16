@@ -69,7 +69,6 @@ const operate = (firstNum, secondNum, operator) => {
 //Functions that populate the display when you click the number buttons
 numbers.forEach(number => {
     number.addEventListener("click", (e) => {
-        //console.log(e, e.target.textContent)
         multiDigit(e.target.textContent);
         resultsBot.textContent = secondNum;
     })
@@ -94,12 +93,9 @@ function multiDigit(num) {
 
 //Add an operator into results
 function insertOper(oper) {
-    //console.log(oper);
     op = oper;
     firstNum = secondNum + " " + oper;
-    //console.log(firstNum);
     secondNum = "";
-    //console.log(secondNum)
 }
 
 //Clear calculator
@@ -144,10 +140,25 @@ equal.addEventListener("click", (e) => {
     //If there is no number, tell user to press number
     if  (resultsBot.textContent === "") {
         resultsBot.textContent = "Input a number"
-    }
+    } 
+    secondNum = "";
 })
 
 //Round number to prevent overflow
 function roundNumber(num) {
-    return Math.round(num * 10000) / 10000;
+return Math.round(num * 10000) / 10000;
+}
+
+//Add decimal to calculator input
+decimal.addEventListener("click", (e) => {
+    addDecimal()
+   
+})
+
+//Function to add decimal
+function addDecimal() {
+    if (!secondNum.includes(".")) {
+        secondNum += ".";
+        resultsBot.textContent = secondNum;
+    }
 }
