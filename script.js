@@ -115,22 +115,31 @@ equal.addEventListener("click", (e) => {
 
     if (resultsTop.textContent.includes("+")) {
         const split = resultsTop.textContent.split("+");
-        resultsBot.textContent = operate(split[0], split[1], "+");
+        resultsBot.textContent = roundNumber(operate(split[0], split[1], "+"));
     }
 
     if (resultsTop.textContent.includes("-")) {
         const split = resultsTop.textContent.split("-");
-        resultsBot.textContent = operate(split[0], split[1], "-");
+        resultsBot.textContent = roundNumber(operate(split[0], split[1], "-"));
     }
 
     if (resultsTop.textContent.includes("×")) {
         const split = resultsTop.textContent.split("×");
-        resultsBot.textContent = operate(split[0], split[1], "×");
+        resultsBot.textContent = roundNumber(operate(split[0], split[1], "×"));
     }
 
     if (resultsTop.textContent.includes("/")) {
         const split = resultsTop.textContent.split("/");
-        resultsBot.textContent = operate(split[0], split[1], "/");
+        resultsBot.textContent = roundNumber(operate(split[0], split[1], "/"));
+    }
+
+    //If there is no number, tell user to press number
+    if  (resultsBot.textContent === "") {
+        resultsBot.textContent = "Input a number"
     }
 })
 
+//Round number to prevent overflow
+function roundNumber(num) {
+    return Math.round(num * 100000) / 100000;
+}
