@@ -7,6 +7,9 @@ const equal = document.querySelector(".equal");
 const decimal = document.querySelector(".decimal");
 const results = document.querySelector(".results");
 
+//Global Variables
+let value = ""; //multiDigit() won't work without this
+
 //Operator Functions
 //Add
 const add = (a, b) => {
@@ -57,4 +60,18 @@ const operate = (firstNum, secondNum, operator) => {
         let answer = divide(valueOne, valueTwo);
         results.innerText = answer;
     } 
+}
+
+//Functions that populate the display when you click the number buttons
+numbers.forEach(number => {
+    number.addEventListener("click", (e) => {
+        //console.log(e, e.target.textContent)
+        multiDigit(e.target.textContent);
+        results.textContent = value;
+    })
+})
+
+//Allow for longer numbers instead of single digit
+function multiDigit(num) {
+    value += num;
 }
