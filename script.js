@@ -16,26 +16,26 @@ let firstNum = ""; //Store first number
 let secondNum = ""; //Store second number
 //Operator Functions
 //Add
-const add = (a, b) => {
-    let answer = a + b;
+const add = (valueOne, valueTwo) => {
+    let answer = valueOne + valueTwo;
     return answer;
 }
 
 //Subtract
-const subtract = (a, b) => {
-    let answer = a - b;
+const subtract = (valueOne, valueTwo) => {
+    let answer = valueOne - valueTwo;
     return answer;
 }
 
 //Multiply
-const multiply = (a, b) => {
-    let answer = a * b;
+const multiply = (valueOne, valueTwo) => {
+    let answer = valueOne * valueTwo;
     return answer;
-}
+} 
 
 //Divide
-const divide = (a, b) => {
-    let answer = a / b;
+const divide = (valueOne, valueTwo) => {
+    let answer = valueOne / valueTwo;
     return answer;
 }
 
@@ -44,25 +44,25 @@ const operate = (firstNum, secondNum, operator) => {
     //To prevent from adding as a string instead of numbers
     const valueOne = Number(firstNum);
     const valueTwo = Number(secondNum);
-
-    if (operator === "+") {
+    
+    if (operator == "+") {
         let answer = add(valueOne, valueTwo);
-        resultsBot.innerText = answer;
+        return answer;
     } 
 
     if (operator === "-") {
         let answer = subtract(valueOne, valueTwo); 
-        resultsBot.innerText = answer;
+        return answer;
     }  
 
     if (operator === "×") {
         let answer = multiply(valueOne, valueTwo);
-        resultsBot.innerText = answer;  
+        return answer;  
     } 
 
     if (operator === "/") {
         let answer = divide(valueOne, valueTwo);
-        resultsBot.innerText = answer;
+        return answer;
     } 
 }
 
@@ -75,7 +75,7 @@ numbers.forEach(number => {
     })
 })
 
-//Making the calculator work
+//Populates with an operator in results
 operator.forEach(oper => {
     oper.addEventListener("click", (e) => {
         insertOper(e.target.textContent);
@@ -94,7 +94,43 @@ function insertOper(oper) {
     //console.log(oper);
     op = oper;
     firstNum = secondNum + " " + oper;
-    console.log(firstNum);
+    //console.log(firstNum);
     secondNum = "";
-    console.log(secondNum)
+    //console.log(secondNum)
 }
+
+//Clear calculator
+clear.addEventListener("click", (e) => {
+    resultsTop.textContent = "";
+    resultsBot.textContent = "";
+    firstNum = "";
+    secondNum = "";
+    op = "";
+})
+
+//Run operate function when pressing equal
+equal.addEventListener("click", (e) => {
+
+    resultsTop.textContent = firstNum  + " " + secondNum;
+
+    if (resultsTop.textContent.includes("+")) {
+        const split = resultsTop.textContent.split("+");
+        resultsBot.textContent = operate(split[0], split[1], "+");
+    }
+
+    if (resultsTop.textContent.includes("-")) {
+        const split = resultsTop.textContent.split("-");
+        resultsBot.textContent = operate(split[0], split[1], "-");
+    }
+
+    if (resultsTop.textContent.includes("×")) {
+        const split = resultsTop.textContent.split("×");
+        resultsBot.textContent = operate(split[0], split[1], "×");
+    }
+
+    if (resultsTop.textContent.includes("/")) {
+        const split = resultsTop.textContent.split("/");
+        resultsBot.textContent = operate(split[0], split[1], "/");
+    }
+})
+
