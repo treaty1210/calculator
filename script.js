@@ -86,7 +86,10 @@ operator.forEach(oper => {
 
 //Allow for longer numbers instead of single digit
 function multiDigit(num) {
-    secondNum += num;
+    //Set limit for number
+    if (secondNum.length < 15) {
+        secondNum += num;
+    }
 }
 
 //Add an operator into results
@@ -141,5 +144,5 @@ equal.addEventListener("click", (e) => {
 
 //Round number to prevent overflow
 function roundNumber(num) {
-    return Math.round(num * 100000) / 100000;
+    return Math.round(num * 10000) / 10000;
 }
