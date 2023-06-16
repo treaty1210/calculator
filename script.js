@@ -133,7 +133,12 @@ equal.addEventListener("click", (e) => {
 
     if (resultsTop.textContent.includes("/")) {
         const split = resultsTop.textContent.split("/");
-        resultsBot.textContent = roundNumber(operate(split[0], split[1], "/"));
+            //Snarky message if dividing by zero
+            if (split[1].includes(0)) {
+                resultsBot.textContent = "Really?";
+            } else {
+                resultsBot.textContent = roundNumber(operate(split[0], split[1], "/"));
+            }
     }
 
     //If there is no number, tell user to press number
